@@ -2,8 +2,10 @@ import Spinner from "./Spinner"
 import styles from "./CountryList.module.css"
 import Message from "./Message"
 import CountryItem from "./CountryItem"
+import { CitiesContextConsumer } from "../context/CitiesContext"
 
-const CountriesList = ({ cities, isLoading }) => {
+const CountriesList = () => {
+    const { cities, isLoading } = CitiesContextConsumer()
     if (isLoading) return <Spinner />
     if (!cities.length) return <Message message={"Add your first city by clicking on a city on the map"} />
     
