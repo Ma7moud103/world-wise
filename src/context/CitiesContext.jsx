@@ -1,6 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { getCities } from "../data/getCities";
 import { getCity } from "../data/getCitiyWithId";
+import { createCity } from "../data/CreateCity";
+import { deleteCity } from "../data/DeleteCity";
 
 const citiesContext = createContext();  
 
@@ -63,10 +65,56 @@ function CitiesContextProvider({ children }) {
         } finally {
             setIsLoading(false);
         }
+  }
+  
+
+  async function CreateNewCity(city) {
+    try {
+      setIsLoading(true);
+      setError(null);
+
+      const res = await createCity(city);
+
+      setCities((cities) => [...cities, res.data[0]]);
+
+      if (res.error) {
+        throw res.error;
+      }
+
+    } catch (err) {
+      console.log("err adding city:", err);
+      setError(err);
+
+    } finally {
+      setIsLoading(false);
     }
+  }
+
+
+  async function DeleteACity(cityId) {
+    try {
+      setIsLoading(true);
+      setError(null);
+
+      const res = await deleteCity(cityId);
+
+      setCities((cities) => cities.filter((city) => city.id !== cityId));
+
+      if (res.error) {
+        throw res.error;
+      }
+
+    } catch (err) {
+      console.log("err deleting city:", err);
+      setError(err);
+
+    } finally {
+      setIsLoading(false);
+    }
+  }
     
     
-    return <citiesContext.Provider value={{ cities, setCities, isLoading, error, setError, currentCity, setCurrentCity, handleFetchingCity }} >
+  return <citiesContext.Provider value={{ cities, setCities, isLoading, error, setError, currentCity, setCurrentCity, handleFetchingCity, CreateNewCity, DeleteACity }} >
         {children}
     </citiesContext.Provider>       
 }

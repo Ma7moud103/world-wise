@@ -1,8 +1,8 @@
-import Spinner from "./Spinner"
+import Spinner from "../Spinner/Spinner"
 import styles from "./CountryList.module.css"
-import Message from "./Message"
+import Message from "../Message/Message"
 import CountryItem from "./CountryItem"
-import { CitiesContextConsumer } from "../context/CitiesContext"
+import { CitiesContextConsumer } from "../../context/CitiesContext"
 
 const CountriesList = () => {
     const { cities, isLoading } = CitiesContextConsumer()
