@@ -10,22 +10,21 @@ import CountriesList from "./components/Countries/CountriesList"
 import City from "./components/Cities/City"
 import Form from "./components/Form/Form"
 import { CitiesContextProvider } from "./context/CitiesContext"
+import { AuthContextProvider } from "./context/AuthContext"
+import ProtectedRoute from "./pages/ProtectedRoute"
+import Signup from "./pages/Signup/Signup"
 
 const App = () => {
 
- 
-
-  
-
   return (
-
+<AuthContextProvider>
     <CitiesContextProvider>
       <BrowserRouter>
         <Routes>
           <Route index element={<Homepage />} />
           <Route path="pricing" element={<Pricing />} />
           <Route path="product" element={<Product />} />
-          <Route path="app" element={<AppLayout />} >
+          <Route path="app" element={<ProtectedRoute><AppLayout /></ProtectedRoute>} >
             <Route index element={<Navigate to={"cities"} replace />} />
             <Route path="cities/:id" element={<City />} />
             <Route path="cities" element={<CityList />} />
@@ -34,11 +33,13 @@ const App = () => {
 
 
           </Route>
-          <Route path="login" element={<Login />} />
+            <Route path="login" element={<Login />} />
+            <Route path="signup" element={<ProtectedRoute><Signup /></ProtectedRoute>} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
    </CitiesContextProvider>
+    </AuthContextProvider>
   )
 }
 
