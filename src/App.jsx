@@ -24,7 +24,7 @@ const App = () => {
           <Route index element={<Homepage />} />
           <Route path="pricing" element={<Pricing />} />
           <Route path="product" element={<Product />} />
-          <Route path="app" element={<ProtectedRoute><AppLayout /></ProtectedRoute>} >
+          <Route path="app" element=      {<ProtectedRoute><AppLayout /></ProtectedRoute>} >
             <Route index element={<Navigate to={"cities"} replace />} />
             <Route path="cities/:id" element={<City />} />
             <Route path="cities" element={<CityList />} />
@@ -33,8 +33,8 @@ const App = () => {
 
 
           </Route>
-            <Route path="login" element={<Login />} />
-            <Route path="signup" element={<ProtectedRoute><Signup /></ProtectedRoute>} />
+          <Route path="login" element={<Login />} />
+          <Route path="signup" element={<Signup />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>

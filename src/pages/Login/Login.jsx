@@ -13,7 +13,7 @@ export default function Login() {
   const [loginError, setLoginError] = useState(null);
 
   const { values, errors, handleChange, isValid } = useFormValidation(
-    { email: "", password: "" },
+    { email: "shawkymahmoud850@gmail.com", password: "Themakan87" },
     VALIDATION_RULES
   );
 
